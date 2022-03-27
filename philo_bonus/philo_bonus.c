@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   philo_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:00 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/27 13:11:19 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/27 03:41:51 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
-void	*ft_routine(void *arg)
+void	ft_routine(t_philo	*philo, size_t index)
 {
-	t_philo	*philo;
-	size_t	index;
-
-	philo = arg;
-	index = philo->philo;
-	philo->last_meal[index] = ft_mls();
 	while (philo->end && philo->error)
 	{
 		if (!ft_take_fork(philo, index))
@@ -40,26 +34,21 @@ void	*ft_routine(void *arg)
 	return (NULL);
 }
 
-int	ft_create_thread(t_philo *philo)
+int	ft_create_philo(t_philo *philo)
 {
-	philo->philo = 0;
-	philo->error = 1;
-	philo->threads = malloc(sizeof(pthread_t) * philo->n_philo);
-	if (!philo->threads)
-		return (0);
+	size_t	i;
+
+	i = 0;
 	philo->last_meal = malloc(sizeof(size_t) * philo->n_philo);
+	while (i < philo->n_philo)
+	{
+		philo->pids[i] = fork();
+		i++;
+	}
 	if (!philo->last_meal)
 		return (0);
 	if (!ft_create_forks(philo, philo->n_philo))
 		return (0);
-	while (philo->philo < philo->n_philo)
-	{
-		if (pthread_create(&philo->threads[philo->philo], NULL,
-				ft_routine, philo) != 0)
-			return (0);
-		usleep(100);
-		philo->philo++;
-	}
 	return (1);
 }
 
@@ -81,10 +70,7 @@ int	main(int argc, char **argv)
 		printf("Incorrect arguments.\n");
 		return (0);
 	}
-	if (!ft_create_thread(philo))
+	if (!ft_create_philo(philo))
 		return (0);
-	if (!ft_manager(philo))
-		return (0);
-	ft_destroy(philo, 1, NULL);
 	return (0);
 }
