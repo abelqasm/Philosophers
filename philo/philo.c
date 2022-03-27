@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:00 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/26 22:54:34 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/27 02:40:23 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,22 @@ void	*ft_routine(void *arg)
 
 	philo = arg;
 	index = philo->philo;
-	while (philo->ded)
+	while (philo->ded && philo->error)
 	{
 		if (!ft_take_fork(philo, index))
-			
-		ft_print_philo("%zu %zu is eating.\n", ft_mls(), index + 1, philo);
-		philo->last_meal[index] = ft_mls();
-		ft_sleep_thread(philo->eat);
-		ft_put_fork(philo, index);
-		ft_print_philo("%zu %zu is sleeping.\n", ft_mls(), index + 1, philo);
-		ft_sleep_thread(philo->sleep);
-		ft_print_philo("%zu %zu is thinking.\n", ft_mls(), index + 1, philo);
+			ft_destroy(philo, 0, &philo->error);
+		if (!ft_print("%zu %zu is eating.\n", ft_mls(), index + 1, philo))
+			ft_destroy(philo, 0, &philo->error);
+		if (philo->error)
+			ft_sleep_thread(philo->eat);
+		if (!ft_put_fork(philo, index))
+			ft_destroy(philo, 0, &philo->error);
+		if (!ft_print("%zu %zu is sleeping.\n", ft_mls(), index + 1, philo))
+			ft_destroy(philo, 0, &philo->error);
+		if (philo->error)
+			ft_sleep_thread(philo->sleep);
+		if (!ft_print("%zu %zu is thinking.\n", ft_mls(), index + 1, philo))
+			ft_destroy(philo, 0, &philo->error);
 	}
 	return (NULL);
 }
@@ -37,6 +42,7 @@ void	*ft_routine(void *arg)
 int	ft_create_thread(t_philo *philo)
 {
 	philo->philo = 0;
+	philo->error = 1;
 	philo->threads = malloc(sizeof(pthread_t) * philo->n_philo);
 	if (!philo->threads)
 		return (0);
@@ -76,6 +82,8 @@ int	main(int argc, char **argv)
 	}
 	if (!ft_create_thread(philo))
 		return (0);
-	ft_manager(philo);
+	if (!ft_manager(philo))
+		return (0);
+	ft_destroy(philo, 1, NULL);
 	return (0);
 }
