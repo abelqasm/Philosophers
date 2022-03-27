@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:17 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/27 13:18:03 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/27 13:30:25 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ typedef struct s_philo
 	size_t			eat;
 	size_t			philo;
 	size_t			n_meal;
-	size_t			*meal;
 	size_t			end;
 	size_t			*last_meal;
+	size_t			argc;
+	size_t			*meal;
 	int				error;
 }	t_philo;
 int		ft_atoi(const char *str);

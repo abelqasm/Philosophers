@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 01:01:49 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/27 13:12:37 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/27 13:39:53 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_sleep_thread(size_t sleep)
 
 	init = ft_mls();
 	while (ft_mls() - init < sleep)
-		usleep(10);
+		usleep(60);
 }
 
 int	ft_print(char *str, size_t time, size_t index, t_philo *philo)
@@ -57,6 +57,8 @@ int	ft_take_fork(t_philo *philo, size_t index)
 	if (!ft_print("%zu %zu has taken a fork.\n", ft_mls(), index + 1, philo))
 		return (0);
 	philo->last_meal[index] = ft_mls();
+	if (philo->argc == 6)
+		philo->meal[index]++;
 	return (1);
 }
 

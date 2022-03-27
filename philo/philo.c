@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:00 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/27 13:11:19 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/27 13:49:02 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*ft_routine(void *arg)
 	philo = arg;
 	index = philo->philo;
 	philo->last_meal[index] = ft_mls();
-	while (philo->end && philo->error)
+	while (philo->end && philo->error && (philo->meal[index] < philo->n_meal))
 	{
 		if (!ft_take_fork(philo, index))
 			ft_destroy(philo, 0, &philo->error);
@@ -68,6 +68,7 @@ int	main(int argc, char **argv)
 	t_philo	*philo;
 
 	philo = malloc(sizeof(t_philo));
+	philo->argc = argc;
 	if (!philo)
 		return (0);
 	philo->end = 1;

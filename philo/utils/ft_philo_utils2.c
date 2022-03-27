@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 21:59:27 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/27 03:54:07 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/27 14:05:34 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,20 @@ int	ft_check_death(t_philo *philo, size_t last_meal, size_t index)
 	return (1);
 }
 
+int	ft_check_meal(t_philo *philo)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < philo->n_philo)
+	{
+		if (!(philo->meal[i] == philo->n_meal))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	ft_manager(t_philo *philo)
 {
 	size_t	i;
@@ -29,7 +43,10 @@ int	ft_manager(t_philo *philo)
 	i = 0;
 	while (philo->end)
 	{
-		philo->end = ft_check_death(philo, philo->last_meal[i], i);
+		if (!(philo->meal[i] == philo->n_meal))
+			philo->end = ft_check_death(philo, philo->last_meal[i], i);
+		else
+			philo->end = ft_check_meal(philo);
 		i = (i + 1) % philo->n_philo;
 	}
 	i = -1;
