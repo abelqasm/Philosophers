@@ -1,10 +1,13 @@
 SRCS = philo.c \
-	./utils/ft_utils.c
+	./utils/ft_atoi.c \
+	./utils/ft_fill_philo.c \
+	./utils/ft_philo_utils.c \
+	./utils/ft_philo_utils2.c
 
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
-CFLAGS = -Werror -Wextra -Wall -fsanitize=address -g
+CFLAGS = -Werror -Wextra -Wall
 NAME = philo
 
 all : $(NAME)
