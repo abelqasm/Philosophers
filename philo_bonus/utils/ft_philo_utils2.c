@@ -6,11 +6,11 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 21:59:27 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/27 02:16:45 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/27 14:25:18 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../philo_bonus.h"
 
 int	ft_check_death(t_philo *philo, size_t last_meal, size_t index)
 {

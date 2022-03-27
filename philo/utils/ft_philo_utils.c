@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 01:01:49 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/27 13:39:53 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/27 18:17:21 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_print(char *str, size_t time, size_t index, t_philo *philo)
 	if (pthread_mutex_lock(&philo->print))
 		return (0);
 	if (philo->end)
-		printf(str, time, index);
+		printf(str, time - philo->mls, index);
 	if (pthread_mutex_unlock(&philo->print))
 		return (0);
 	return (1);

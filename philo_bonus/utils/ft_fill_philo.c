@@ -6,11 +6,11 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 01:00:06 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/27 03:15:11 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/27 14:24:12 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../philo_bonus.h"
 
 int	ft_fill_philo(t_philo *philo, int argc, char **argv)
 {

@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:00 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/27 13:49:02 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/27 18:17:36 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	ft_create_thread(t_philo *philo)
 {
 	philo->philo = 0;
 	philo->error = 1;
+	philo->mls = ft_mls();
 	philo->threads = malloc(sizeof(pthread_t) * philo->n_philo);
 	if (!philo->threads)
 		return (0);

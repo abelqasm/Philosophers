@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:00 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/27 03:41:51 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/27 14:10:37 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_routine(t_philo	*philo, size_t index)
 		if (!ft_print("%zu %zu is thinking.\n", ft_mls(), index + 1, philo))
 			ft_destroy(philo, 0, &philo->error);
 	}
-	return (NULL);
 }
 
 int	ft_create_philo(t_philo *philo)
@@ -40,13 +39,15 @@ int	ft_create_philo(t_philo *philo)
 
 	i = 0;
 	philo->last_meal = malloc(sizeof(size_t) * philo->n_philo);
+	if (!philo->last_meal)
+		return (0);
 	while (i < philo->n_philo)
 	{
 		philo->pids[i] = fork();
+		if (philo->pids[i] == 0)
+			ft_routine(philo, i);
 		i++;
 	}
-	if (!philo->last_meal)
-		return (0);
 	if (!ft_create_forks(philo, philo->n_philo))
 		return (0);
 	return (1);
