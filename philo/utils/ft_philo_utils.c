@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 01:01:49 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/27 18:17:21 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/28 17:38:20 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	ft_take_fork(t_philo *philo, size_t index)
 		return (1);
 	if (pthread_mutex_lock(&philo->fork[index]))
 		return (0);
-	if (pthread_mutex_lock(&philo->fork[(index + 1) % philo->n_philo]))
-		return (0);
 	if (!ft_print("%zu %zu has taken a fork.\n", ft_mls(), index + 1, philo))
+		return (0);
+	if (pthread_mutex_lock(&philo->fork[(index + 1) % philo->n_philo]))
 		return (0);
 	if (!ft_print("%zu %zu has taken a fork.\n", ft_mls(), index + 1, philo))
 		return (0);

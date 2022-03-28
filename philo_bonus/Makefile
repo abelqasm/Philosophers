@@ -7,18 +7,18 @@ SRCS = philo_bonus.c \
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
-CFLAGS = -Werror -Wextra -Wall -fsanitize=address
-NAME = philo_bonus
+# CFLAGS = -Werror -Wextra -Wall -fsanitize=address
+BONUS = philo_bonus
 
-all : $(NAME)
+all : $(BONUS)
 
-$(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(FTPRINTF) -o $(NAME)
+$(BONUS) : $(OBJS)
+	$(CC) $(OBJS) $(FTPRINTF) -o $(BONUS)
 
 clean :
 	rm -rf $(OBJS)
 
 fclean : clean
-	rm -rf $(NAME)
+	rm -rf $(BONUS)
 
 re : fclean all

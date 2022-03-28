@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:00 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/28 03:39:52 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/28 17:31:20 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ void	ft_philo(t_philo *philo)
 {
 	pthread_t	thread;
 
-	pthread_create(&thread, NULL, ft_manage, philo);
+	philo->mls = ft_mls();
 	philo->last_meal[philo->philo] = ft_mls();
+	pthread_create(&thread, NULL, ft_manage, philo);
 	while (1)
 	{
 		ft_take_fork(philo, philo->philo);
@@ -51,7 +52,6 @@ void	ft_philo(t_philo *philo)
 int	ft_create_philo(t_philo *philo)
 {
 	philo->philo = 0;
-	philo->mls = ft_mls();
 	philo->last_meal = malloc(sizeof(size_t) * philo->n_philo);
 	if (!philo->last_meal)
 		return (0);
@@ -65,6 +65,7 @@ int	ft_create_philo(t_philo *philo)
 		philo->pids[philo->philo] = fork();
 		if (philo->pids[philo->philo] == 0)
 			ft_philo(philo);
+		usleep(100);
 		philo->philo++;
 	}
 	ft_supervisor(philo);
