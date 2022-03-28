@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:00 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/27 18:17:36 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/28 01:51:38 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ int	main(int argc, char **argv)
 	t_philo	*philo;
 
 	philo = malloc(sizeof(t_philo));
-	philo->argc = argc;
 	if (!philo)
 		return (0);
+	philo->argc = argc;
 	philo->end = 1;
 	if (argc != 5 && argc != 6)
 	{
@@ -85,8 +85,7 @@ int	main(int argc, char **argv)
 	}
 	if (!ft_create_thread(philo))
 		return (0);
-	if (!ft_manager(philo))
-		return (0);
+	ft_manager(philo);
 	ft_destroy(philo, 1, NULL);
 	return (0);
 }

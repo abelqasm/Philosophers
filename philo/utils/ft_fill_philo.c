@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 01:00:06 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/27 14:07:14 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/27 19:47:23 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	ft_fill_philo(t_philo *philo, int argc, char **argv)
 	else
 		philo->n_meal = 1;
 	ft_fill_meal(philo);
+	if (philo->n_philo == 1)
+		philo->end = 0;
 	return (1);
 }
 

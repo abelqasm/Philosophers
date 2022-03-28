@@ -6,50 +6,61 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:00 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/27 14:10:37 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/28 00:55:58 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	ft_routine(t_philo	*philo, size_t index)
+void	*ft_manage(void *arg)
 {
-	while (philo->end && philo->error)
+	t_philo	*philo;
+	
+	philo = arg;
+	while (1)
 	{
-		if (!ft_take_fork(philo, index))
-			ft_destroy(philo, 0, &philo->error);
-		if (!ft_print("%zu %zu is eating.\n", ft_mls(), index + 1, philo))
-			ft_destroy(philo, 0, &philo->error);
-		if (philo->error)
-			ft_sleep_thread(philo->eat);
-		if (!ft_put_fork(philo, index))
-			ft_destroy(philo, 0, &philo->error);
-		if (!ft_print("%zu %zu is sleeping.\n", ft_mls(), index + 1, philo))
-			ft_destroy(philo, 0, &philo->error);
-		if (philo->error)
-			ft_sleep_thread(philo->sleep);
-		if (!ft_print("%zu %zu is thinking.\n", ft_mls(), index + 1, philo))
-			ft_destroy(philo, 0, &philo->error);
+		if (ft_mls() - philo->last_meal[philo->philo] >= philo->death)
+		{
+			ft_print("%zu %zu has died.\n", ft_mls(), philo->philo + 1, philo);
+			exit(0);
+		}
+		if (philo->meal[philo->philo] == philo->n_meal)
+			exit(1);
+	}
+	return (NULL);
+}
+
+void	ft_philo(t_philo *philo)
+{ 
+	pthread_t	thread;
+
+	pthread_create(&thread, NULL, ft_manage, philo);
+	philo->last_meal[philo->philo] = ft_mls();
+	while (1)
+	{
+		ft_take_fork(philo, philo->philo);
+		ft_print("%zu %zu is eating.\n", ft_mls(), philo->philo + 1, philo);
+		ft_sleep_thread(philo->eat);
+		ft_put_fork(philo);
+		ft_print("%zu %zu is sleeping.\n", ft_mls(), philo->philo + 1, philo);
+		ft_sleep_thread(philo->sleep);
+		ft_print("%zu %zu is thinking.\n", ft_mls(), philo->philo + 1, philo);
 	}
 }
 
 int	ft_create_philo(t_philo *philo)
 {
-	size_t	i;
-
-	i = 0;
+	philo->philo = 0;
 	philo->last_meal = malloc(sizeof(size_t) * philo->n_philo);
 	if (!philo->last_meal)
 		return (0);
-	while (i < philo->n_philo)
+	while (philo->philo < philo->n_philo)
 	{
-		philo->pids[i] = fork();
-		if (philo->pids[i] == 0)
-			ft_routine(philo, i);
-		i++;
+		philo->pids[philo->philo] = fork();
+		if (philo->pids[philo->philo] == 0)
+			ft_philo(philo);
+		philo->philo++;
 	}
-	if (!ft_create_forks(philo, philo->n_philo))
-		return (0);
 	return (1);
 }
 
@@ -60,7 +71,7 @@ int	main(int argc, char **argv)
 	philo = malloc(sizeof(t_philo));
 	if (!philo)
 		return (0);
-	philo->end = 1;
+	philo->argc = argc;
 	if (argc != 5 && argc != 6)
 	{
 		printf("Incorrect number of arguments.\n");

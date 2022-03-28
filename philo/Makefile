@@ -7,7 +7,7 @@ SRCS = philo.c \
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
-CFLAGS = -Werror -Wextra -Wall
+CFLAGS = -Werror -Wextra -Wall -fsanitize=address
 NAME = philo
 
 all : $(NAME)

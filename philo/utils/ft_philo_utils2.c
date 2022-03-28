@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 21:59:27 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/27 14:05:34 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/28 02:30:06 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_check_death(t_philo *philo, size_t last_meal, size_t index)
 {
-	if (ft_mls() - last_meal > philo->death)
+	if (ft_mls() - last_meal >= philo->death)
 	{
-		printf("%zu %zu has died.\n", ft_mls(), index + 1);
+		ft_print("%zu %zu has died.\n", ft_mls(), index + 1, philo);
 		return (0);
 	}
 	return (1);
@@ -41,6 +41,12 @@ int	ft_manager(t_philo *philo)
 	size_t	i;
 
 	i = 0;
+	if (!philo->end)
+	{
+		printf("%d %d has taken a fork.\n", 0, 1);
+		ft_sleep_thread(philo->death);
+		printf("%zu %d has died.\n", philo->death, 1);
+	}
 	while (philo->end)
 	{
 		if (!(philo->meal[i] == philo->n_meal))
