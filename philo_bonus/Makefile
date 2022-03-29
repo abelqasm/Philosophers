@@ -7,7 +7,7 @@ SRCS = philo_bonus.c \
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
-CFLAGS = -Werror -Wextra -Wall -fsanitize=address
+CFLAGS = -Werror -Wextra -Wall
 BONUS = philo_bonus
 
 all : $(BONUS)

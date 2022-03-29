@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:00 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/29 17:54:33 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/29 19:14:03 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_manage(void *arg)
 	philo = arg;
 	while (1)
 	{
-		if (ft_mls() - philo->last_meal[philo->philo] >= philo->death)
+		if (!philo->life)
 		{
 			ft_print("%zu %zu has died.\n", ft_mls(), philo->philo + 1, philo);
 			philo->end = 0;
@@ -27,6 +27,7 @@ void	*ft_manage(void *arg)
 		}
 		if (philo->meal[philo->philo] == philo->n_meal)
 			exit(1);
+		usleep(1000);
 	}
 	return (NULL);
 }
@@ -36,8 +37,9 @@ void	ft_philo(t_philo *philo)
 	pthread_t	thread;
 
 	philo->last_meal[philo->philo] = ft_mls();
-	printf("1\n");
 	pthread_create(&thread, NULL, ft_manage, philo);
+	if (philo->philo % 2)
+		usleep(500);
 	while (1)
 	{
 		ft_take_fork(philo, philo->philo);
@@ -53,6 +55,8 @@ void	ft_philo(t_philo *philo)
 int	ft_create_philo(t_philo *philo)
 {
 	philo->philo = 0;
+	philo->life = 1;
+	philo->mls = ft_mls();
 	philo->last_meal = malloc(sizeof(size_t) * philo->n_philo);
 	if (!philo->last_meal)
 		return (0);
