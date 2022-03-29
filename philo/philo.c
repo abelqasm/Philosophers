@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:00 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/28 23:42:20 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:24:28 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ void	*ft_routine(void *arg)
 	{
 		if (!ft_take_fork(philo, index))
 			ft_destroy(philo, 0, &philo->error);
-		if (!ft_print("%zu %zu is eating.\n", ft_mls(), index + 1, philo))
+		if (!ft_print("%zu %zu is eating.\n", index + 1, philo))
 			ft_destroy(philo, 0, &philo->error);
-		if (philo->error)
+		if (philo->error && philo->end)
 			ft_sleep_thread(philo->eat);
 		if (!ft_put_fork(philo, index))
 			ft_destroy(philo, 0, &philo->error);
-		if (!ft_print("%zu %zu is sleeping.\n", ft_mls(), index + 1, philo))
+		if (!ft_print("%zu %zu is sleeping.\n", index + 1, philo))
 			ft_destroy(philo, 0, &philo->error);
-		if (philo->error)
+		if (philo->error && philo->end)
 			ft_sleep_thread(philo->sleep);
-		if (!ft_print("%zu %zu is thinking.\n", ft_mls(), index + 1, philo))
+		if (!ft_print("%zu %zu is thinking.\n", index + 1, philo))
 			ft_destroy(philo, 0, &philo->error);
 	}
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:08:38 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/27 14:25:06 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:49:01 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	check_num(const char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] > '9' || str[i] < '0')
+		if (str[i] > '9' || str[i] < '0' || i > 12)
 			return (0);
 		i++;
 	}

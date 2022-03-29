@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:00 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/29 19:14:03 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/29 22:31:27 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ void	*ft_manage(void *arg)
 	{
 		if (!philo->life)
 		{
-			ft_print("%zu %zu has died.\n", ft_mls(), philo->philo + 1, philo);
 			philo->end = 0;
-			exit(0);
+			ft_print("%zu %zu has died.\n", philo->philo + 1, philo);
 		}
 		if (philo->meal[philo->philo] == philo->n_meal)
 			exit(1);
@@ -43,12 +42,12 @@ void	ft_philo(t_philo *philo)
 	while (1)
 	{
 		ft_take_fork(philo, philo->philo);
-		ft_print("%zu %zu is eating.\n", ft_mls(), philo->philo + 1, philo);
+		ft_print("%zu %zu is eating.\n", philo->philo + 1, philo);
 		ft_sleep_thread(philo->eat);
 		ft_put_fork(philo);
-		ft_print("%zu %zu is sleeping.\n", ft_mls(), philo->philo + 1, philo);
+		ft_print("%zu %zu is sleeping.\n", philo->philo + 1, philo);
 		ft_sleep_thread(philo->sleep);
-		ft_print("%zu %zu is thinking.\n", ft_mls(), philo->philo + 1, philo);
+		ft_print("%zu %zu is thinking.\n", philo->philo + 1, philo);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 01:01:49 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/29 18:57:50 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/29 22:32:04 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,29 @@ void	ft_sleep_thread(size_t sleep)
 		usleep(400);
 }
 
-void	ft_print(char *str, size_t time, size_t index, t_philo *philo)
+void	ft_print(char *str, size_t index, t_philo *philo)
 {
 	sem_wait(philo->print);
-	if (philo->end)
-		printf(str, time - philo->mls, index);
+	printf(str, ft_mls() - philo->mls, index);
+	if (philo->end == 0)
+		exit(0);
 	sem_post(philo->print);
 }
 
 void	ft_take_fork(t_philo *philo, size_t index)
 {
 	sem_wait(philo->forks);
-	ft_print("%zu %zu has taken a fork.\n", ft_mls(), index + 1, philo);
+	ft_print("%zu %zu has taken a fork.\n", index + 1, philo);
 	sem_wait(philo->forks);
-	ft_print("%zu %zu has taken a fork.\n", ft_mls(), index + 1, philo);
+	ft_print("%zu %zu has taken a fork.\n", index + 1, philo);
 	if (ft_mls() - philo->last_meal[index] >= philo->death)
 		philo->life = 0;
 	if (philo->life)
 		philo->last_meal[index] = ft_mls();
 	if (philo->argc == 6)
 		philo->meal[index]++;
+	if (philo->meal[index] == philo->n_meal)
+		ft_put_fork(philo);
 }
 
 void	ft_put_fork(t_philo *philo)

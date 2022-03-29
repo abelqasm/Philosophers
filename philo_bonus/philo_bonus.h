@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:17 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/29 18:55:39 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/29 22:31:41 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int		ft_atoi(const char *str);
 int		ft_fill_philo(t_philo *philo, int argc, char **argv);
 void	ft_take_fork(t_philo *philo, size_t index);
 void	ft_put_fork(t_philo *philo);
-void	ft_print(char *str, size_t time, size_t index, t_philo *philo);
+void	ft_print(char *str, size_t index, t_philo *philo);
 void	ft_sleep_thread(size_t sleep);
 void	ft_supervisor(t_philo *philo);
 size_t	ft_mls(void);
