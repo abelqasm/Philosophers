@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 01:01:49 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/28 03:38:18 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/29 17:47:34 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ void	ft_sleep_thread(size_t sleep)
 
 	init = ft_mls();
 	while (ft_mls() - init < sleep)
-		usleep(10);
+		usleep(400);
 }
 
 void	ft_print(char *str, size_t time, size_t index, t_philo *philo)
 {
 	sem_wait(philo->print);
-	printf(str, time - philo->mls, index);
+	if (philo->end)
+		printf(str, time, index);
 	sem_post(philo->print);
 }
 

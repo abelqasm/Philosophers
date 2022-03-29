@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:17 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/28 03:39:39 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/29 14:56:37 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ typedef struct s_philo
 	pid_t			*pids;
 	sem_t			*forks;
 	sem_t			*print;
+	sem_t			*time;
+	sem_t			*t;
 	size_t			n_philo;
 	size_t			death;
 	size_t			sleep;
 	size_t			eat;
 	size_t			n_meal;
 	size_t			*meal;
+	size_t			end;
 	size_t			philo;
 	size_t			argc;
 	size_t			mls;
