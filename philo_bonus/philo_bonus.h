@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:17 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/29 22:31:41 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/30 02:22:39 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_philo
 	sem_t			*print;
 	size_t			n_philo;
 	size_t			philo;
-	size_t			life;
 	size_t			death;
 	size_t			sleep;
 	size_t			eat;
