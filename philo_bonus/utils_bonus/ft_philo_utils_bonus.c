@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 01:01:49 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/30 02:22:25 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/30 17:01:09 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	ft_take_fork(t_philo *philo, size_t index)
 	ft_print("%zu %zu has taken a fork.\n", index + 1, philo);
 	sem_wait(philo->forks);
 	ft_print("%zu %zu has taken a fork.\n", index + 1, philo);
-	philo->last_meal[index] = ft_mls();
+	philo->last_meal = ft_mls();
 	if (philo->argc == 6)
-		philo->meal[index]++;
-	if (philo->meal[index] == philo->n_meal)
+		philo->meal++;
+	if (philo->meal == philo->n_meal)
 		ft_put_fork(philo);
 }
 

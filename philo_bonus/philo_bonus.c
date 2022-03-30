@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:00 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/30 02:21:37 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/30 17:05:04 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	*ft_manage(void *arg)
 	philo = arg;
 	while (1)
 	{
-		if (ft_mls() - philo->last_meal[philo->philo] >= philo->death)
+		if (ft_mls() - philo->last_meal >= philo->death)
 		{
 			philo->end = 0;
 			ft_print("%zu %zu has died.\n", philo->philo + 1, philo);
 		}
-		if (philo->meal[philo->philo] == philo->n_meal)
+		if (philo->meal == philo->n_meal)
 			exit(1);
 		usleep(1000);
 	}
@@ -35,7 +35,7 @@ void	ft_philo(t_philo *philo)
 {
 	pthread_t	thread;
 
-	philo->last_meal[philo->philo] = ft_mls();
+	philo->last_meal = ft_mls();
 	pthread_create(&thread, NULL, ft_manage, philo);
 	if (philo->philo % 2)
 		usleep(500);
@@ -55,17 +55,14 @@ int	ft_create_philo(t_philo *philo)
 {
 	philo->philo = 0;
 	philo->mls = ft_mls();
-	philo->last_meal = malloc(sizeof(size_t) * philo->n_philo);
-	if (!philo->last_meal)
-		return (0);
 	philo->pids = malloc(sizeof(pid_t) * philo->n_philo);
 	if (!philo->pids)
-		return (0);
-	if (!philo->last_meal)
 		return (0);
 	while (philo->philo < philo->n_philo)
 	{
 		philo->pids[philo->philo] = fork();
+		if (philo->pids[philo->philo] == -1)
+			return (0);
 		if (philo->pids[philo->philo] == 0)
 			ft_philo(philo);
 		philo->philo++;

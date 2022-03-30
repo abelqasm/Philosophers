@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:17 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/30 02:22:39 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/30 17:07:23 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <semaphore.h>
+# include <sys/types.h>
 # include <signal.h>
 
 typedef struct s_philo
@@ -31,11 +32,11 @@ typedef struct s_philo
 	size_t			sleep;
 	size_t			eat;
 	size_t			n_meal;
-	size_t			*meal;
+	size_t			meal;
 	size_t			end;
 	size_t			argc;
 	size_t			mls;
-	size_t			*last_meal;
+	size_t			last_meal;
 }	t_philo;
 int		ft_atoi(const char *str);
 int		ft_fill_philo(t_philo *philo, int argc, char **argv);

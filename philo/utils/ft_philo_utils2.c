@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 21:59:27 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/29 21:08:47 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/30 17:28:14 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,22 @@ int	ft_check_meal(t_philo *philo)
 	return (0);
 }
 
+void	ft_kill_one(t_philo *philo)
+{
+	printf("%d %d has taken a fork.\n", 0, 1);
+	philo->end = 1;
+	ft_sleep_thread(philo->death, philo);
+	printf("%zu %d has died.\n", philo->death, 1);
+	philo->end = 0;
+}
+
 int	ft_manager(t_philo *philo)
 {
 	size_t	i;
 
 	i = 0;
 	if (!philo->end)
-	{
-		printf("%d %d has taken a fork.\n", 0, 1);
-		ft_sleep_thread(philo->death);
-		printf("%zu %d has died.\n", philo->death, 1);
-	}
+		ft_kill_one(philo);
 	while (philo->end)
 	{
 		if (!(philo->meal[i] == philo->n_meal))

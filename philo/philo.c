@@ -6,7 +6,7 @@
 /*   By: abelqasm <abelqasm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 02:54:00 by abelqasm          #+#    #+#             */
-/*   Updated: 2022/03/30 01:51:47 by abelqasm         ###   ########.fr       */
+/*   Updated: 2022/03/30 17:18:15 by abelqasm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	*ft_routine(void *arg)
 		if (!ft_print("%zu %zu is eating.\n", index + 1, philo))
 			ft_destroy(philo, 0, &philo->error);
 		if (philo->error && philo->end)
-			ft_sleep_thread(philo->eat);
+			ft_sleep_thread(philo->eat, philo);
 		if (!ft_put_fork(philo, index))
 			ft_destroy(philo, 0, &philo->error);
 		if (!ft_print("%zu %zu is sleeping.\n", index + 1, philo))
 			ft_destroy(philo, 0, &philo->error);
 		if (philo->error && philo->end)
-			ft_sleep_thread(philo->sleep);
+			ft_sleep_thread(philo->sleep, philo);
 		if (!ft_print("%zu %zu is thinking.\n", index + 1, philo))
 			ft_destroy(philo, 0, &philo->error);
 	}
